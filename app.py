@@ -7,6 +7,7 @@ import geopandas as gpd
 import altair as alt
 from streamlit_folium import folium_static 
 import folium
+import geemap
 
 MAP_EMOJI_URL = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/thermometer_1f321-fe0f.png"
 
@@ -37,15 +38,16 @@ col2.markdown("""
     ---
     """)
 
+# json_data = st.secrets["json_data"]
+# service_account = st.secrets["service_account"]
 
-json_data = st.secrets["json_data"]
-service_account = st.secrets["service_account"]
 
+# json_object = json.loads(json_data, strict=False)
+# json_object = json.dumps(json_object)
+# credentials = ee.ServiceAccountCredentials(service_account, key_data=json_object)
+# ee.Initialize(credentials)
 
-json_object = json.loads(json_data, strict=False)
-json_object = json.dumps(json_object)
-credentials = ee.ServiceAccountCredentials(service_account, key_data=json_object)
-ee.Initialize(credentials)
+geemap.ee_initialize(st.secrets["EARTHENGINE_TOKEN"])
 
 import src.gee as gee
 
